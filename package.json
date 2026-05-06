@@ -13,9 +13,16 @@
     "@mediapipe/camera_utils": "^0.3.1675466862",
     "@mediapipe/drawing_utils": "^0.3.1675466124",
     "@mediapipe/pose": "^0.5.1675469404",
+    "@tailwindcss/vite": "^4.2.4",
+    "autoprefixer": "^10.5.0",
+    "framer-motion": "^12.38.0",
+    "gsap": "^3.15.0",
     "lucide-react": "^1.8.0",
+    "postcss": "^8.5.14",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "react-router-dom": "^7.15.0",
+    "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
