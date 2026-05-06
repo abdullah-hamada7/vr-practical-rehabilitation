@@ -12,7 +12,7 @@ import {
 import { drawSkeleton } from "./utils/canvasDrawing";
 import { ROM_CONFIG, computeROMScore } from "./utils/romConfig";
 
-import { Activity, CircleCheckBig, Shield, Zap, BarChart3, ChevronRight, HeartPulse, Brain, Fingerprint, X, History, Trash2, AlertTriangle } from "lucide-react";
+import { Activity, CircleCheckBig, Shield, Zap, BarChart3, ChevronRight, ChevronLeft, HeartPulse, Brain, Fingerprint, X, History, Trash2, AlertTriangle } from "lucide-react";
 
 
 
@@ -681,59 +681,130 @@ export default function App() {
             <p className="text-lg text-gray-400 font-bold">Select an exercise to begin your session</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-20">
+          {(() => {
+            const perPage = 4;
+            const totalPages = Math.ceil(exList.length / perPage);
+            const [sliderPage, setSliderPage] = React.useState(0);
+            const pageExercises = exList.slice(sliderPage * perPage, (sliderPage + 1) * perPage);
 
-            {exList.map((ex, i) => {
-              const isSelected = selectedExerciseId === ex.id;
-              const numStr = `0${i + 1}`;
-              return (
-                <motion.div
-                  key={ex.id}
-                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => setSelectedExerciseId(ex.id)}
-                  className={`group relative p-12 py-16 rounded-[48px] bg-white/70 backdrop-blur-md border-2 cursor-pointer transition-all duration-700 overflow-hidden flex flex-col items-center justify-center text-center min-h-[220px]
-                    ${isSelected 
-                      ? 'border-brand-primary shadow-2xl shadow-brand-primary/10 bg-brand-primary/[0.02]' 
-                      : 'border-black/[0.03] shadow-sm hover:border-black/10'}`}
-                >
-                  {/* Background Large Number */}
-                  <div className="absolute -bottom-10 -left-6 text-[160px] font-black text-black/[0.02] pointer-events-none select-none tracking-tighter leading-none transition-all duration-700 group-hover:opacity-[0.05] group-hover:scale-110">
-                    {numStr}
-                  </div>
+            // Auto-advance every 5 seconds, loop back to first page
+            React.useEffect(() => {
+              const timer = setInterval(() => {
+                setSliderPage(prev => (prev + 1) % totalPages);
+              }, 3000);
+              return () => clearInterval(timer);
+            }, [sliderPage, totalPages]);
 
-
-                  {/* Selection Indicator Glow */}
-                  {isSelected && (
-                    <motion.div 
-                      layoutId="cardGlow"
-                      className="absolute inset-0 bg-brand-primary/5 blur-3xl"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                    />
+            return (
+              <div className="mb-20">
+                {/* Slider Container */}
+                <div className="relative">
+                  {/* Left Arrow */}
+                  {sliderPage > 0 && (
+                    <button
+                      onClick={() => setSliderPage(p => p - 1)}
+                      className="absolute -left-16 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white shadow-xl shadow-black/10 flex items-center justify-center text-gray-600 hover:text-brand-primary hover:scale-110 transition-all cursor-pointer border border-black/[0.05]"
+                    >
+                      <ChevronLeft size={22} strokeWidth={2.5} />
+                    </button>
                   )}
 
-                  {/* Top Left Hash Number */}
-                  <div className="absolute top-8 left-10 flex items-center gap-1 opacity-40 group-hover:opacity-100 transition-opacity">
-                    <span className="text-[10px] font-black text-brand-primary mt-1">#</span>
-                    <span className={`text-base font-black tracking-tighter ${isSelected ? 'text-brand-primary' : 'text-gray-400'}`}>{numStr}</span>
-                  </div>
+                  {/* Right Arrow */}
+                  {sliderPage < totalPages - 1 && (
+                    <button
+                      onClick={() => setSliderPage(p => p + 1)}
+                      className="absolute -right-16 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white shadow-xl shadow-black/10 flex items-center justify-center text-gray-600 hover:text-brand-primary hover:scale-110 transition-all cursor-pointer border border-black/[0.05]"
+                    >
+                      <ChevronRight size={22} strokeWidth={2.5} />
+                    </button>
+                  )}
 
-                  <div className={`absolute top-8 right-10 transition-all duration-500 ${isSelected ? 'scale-110 opacity-100' : 'scale-0 opacity-0'}`}>
-                    <div className="w-6 h-6 rounded-full bg-brand-primary flex items-center justify-center text-white shadow-lg shadow-brand-primary/30">
-                      <CircleCheckBig size={14} strokeWidth={3} />
-                    </div>
-                  </div>
+                  {/* Cards */}
+                  <div className="overflow-hidden py-6">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={sliderPage}
+                        initial={{ opacity: 0, x: 80 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -80 }}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10"
+                      >
+                        {pageExercises.map((ex, localIdx) => {
+                          const globalIdx = sliderPage * perPage + localIdx;
+                          const isSelected = selectedExerciseId === ex.id;
+                          const numStr = `${globalIdx + 1}`;
+                          return (
+                            <motion.div
+                              key={ex.id}
+                              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                              whileTap={{ scale: 0.98 }}
+                              onClick={() => setSelectedExerciseId(ex.id)}
+                              className={`group relative p-12 py-16 rounded-[48px] bg-white/70 backdrop-blur-md border-2 cursor-pointer transition-all duration-700 overflow-hidden flex flex-col items-center justify-center text-center min-h-[220px]
+                                ${isSelected 
+                                  ? 'border-brand-primary shadow-2xl shadow-brand-primary/10 bg-brand-primary/[0.02]' 
+                                  : 'border-black/[0.03] shadow-sm hover:border-black/10'}`}
+                            >
+                              {/* Background Large Number */}
+                              <div className="absolute -bottom-10 left-1 text-[160px] font-black text-black/[0.02] pointer-events-none select-none tracking-tighter leading-none transition-all duration-700 group-hover:opacity-[0.05] group-hover:scale-110">
+                                {numStr}
+                              </div>
 
-                  <div className="relative z-10">
-                    <h3 className={`text-2xl font-black leading-tight transition-all duration-500 ${isSelected ? 'text-gray-900 scale-105' : 'text-gray-400 group-hover:text-gray-600'}`}>
-                      {ex.name}
-                    </h3>
+                              {/* Selection Indicator Glow */}
+                              {isSelected && (
+                                <motion.div 
+                                  layoutId="cardGlow"
+                                  className="absolute inset-0 bg-brand-primary/5 blur-3xl"
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                />
+                              )}
+
+                              {/* Top Left Hash Number */}
+                              <div className="absolute top-8 left-10 flex items-center gap-1 opacity-40 group-hover:opacity-100 transition-opacity">
+                                <span className="text-[10px] font-black text-brand-primary mt-1">#</span>
+                                <span className={`text-base font-black tracking-tighter ${isSelected ? 'text-brand-primary' : 'text-gray-400'}`}>{numStr}</span>
+                              </div>
+
+                              <div className={`absolute top-8 right-10 transition-all duration-500 ${isSelected ? 'scale-110 opacity-100' : 'scale-0 opacity-0'}`}>
+                                <div className="w-6 h-6 rounded-full bg-brand-primary flex items-center justify-center text-white shadow-lg shadow-brand-primary/30">
+                                  <CircleCheckBig size={14} strokeWidth={3} />
+                                </div>
+                              </div>
+
+                              <div className="relative z-10">
+                                <h3 className={`text-2xl font-black leading-tight transition-all duration-500 ${isSelected ? 'text-gray-900 scale-105' : 'text-gray-400 group-hover:text-gray-600'}`}>
+                                  {ex.name}
+                                </h3>
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+                      </motion.div>
+                    </AnimatePresence>
                   </div>
-                </motion.div>
-              );
-            })}
-          </div>
+                </div>
+
+                {/* Dots */}
+                {totalPages > 1 && (
+                  <div className="flex items-center justify-center gap-2.5 mt-10">
+                    {Array.from({ length: totalPages }).map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setSliderPage(idx)}
+                        className={`rounded-full transition-all duration-300 cursor-pointer ${
+                          idx === sliderPage
+                            ? 'w-8 h-2.5 bg-brand-primary shadow-md shadow-brand-primary/30'
+                            : 'w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })()}
+
 
           <AnimatePresence mode="wait">
 
