@@ -59,6 +59,7 @@ export default function ExerciseSelector({ selectedExercise, onSelect }) {
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="absolute z-[100] top-full left-0 w-full bg-white border border-black/8 rounded-2xl shadow-2xl overflow-hidden py-2"
           >
+            <div className="max-h-[250px] overflow-y-auto custom-scrollbar">
             {Object.values(exercises).map((ex) => {
               const isSelected = ex.id === selectedExercise;
               return (
@@ -85,6 +86,7 @@ export default function ExerciseSelector({ selectedExercise, onSelect }) {
                 </button>
               );
             })}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
