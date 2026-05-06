@@ -12,7 +12,7 @@ import {
 import { drawSkeleton } from "./utils/canvasDrawing";
 import { ROM_CONFIG, computeROMScore } from "./utils/romConfig";
 
-import { Activity, CircleCheckBig, Shield, Zap, BarChart3, ChevronRight, HeartPulse, Brain, Fingerprint, X, History, Trash2, AlertTriangle } from "lucide-react";
+import { Activity, CircleCheckBig, Shield, Zap, BarChart3, ChevronRight, ChevronLeft, HeartPulse, Brain, Fingerprint, X, History, Trash2, AlertTriangle } from "lucide-react";
 
 
 
@@ -1032,55 +1032,69 @@ export default function App() {
       <Route path="/dashboard" element={
         <div className="app-container">
           <header className="header">
-            <div
-              className="brand-new"
-              onClick={() => {
-                setIsSessionActive(false);
-                navigate("/");
-              }}
-            >
-
-          <div className="brand-icon-box">
-            <Activity size={22} />
-          </div>
-          <span className="brand-text">
-            rehabilitation<span className="text-brand-primary">.ai</span>
-          </span>
-        </div>
-
-        <div className="header-controls">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setIsHistoryOpen(true)}
-              className="flex items-center gap-2 px-6 py-3 bg-white border border-black/[0.05] text-gray-600 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-gray-50 transition-all cursor-pointer"
-            >
-              <History size={16} />
-              History
-            </button>
-
-            {isSessionActive ? (
-              <button 
-                onClick={() => {
-                  finishSession();
-                  setIsSessionActive(false);
-                }} 
-                className="finish-btn"
-              >
-                Finish Session
-              </button>
-            ) : (
+            <div className="flex items-center gap-6">
               <button
-                onClick={() => setIsQuickStartOpen(true)}
-                className="px-6 py-3 bg-brand-primary text-white rounded-xl text-[11px] font-black uppercase tracking-widest shadow-lg shadow-brand-primary/20 hover:scale-105 transition-all active:scale-95 cursor-pointer"
+                onClick={() => {
+                  stopCamera();
+                  resetSession();
+                  setIsSessionActive(false);
+                  navigate("/selection");
+                }}
+                className="p-2.5 rounded-full bg-white border border-black/[0.05] text-gray-400 hover:text-gray-900 hover:bg-gray-50 transition-all cursor-pointer shadow-sm group"
+                title="Change Exercise"
               >
-                Start Session
+                <ChevronLeft size={20} strokeWidth={3} className="group-hover:-translate-x-0.5 transition-transform" />
               </button>
-            )}
-          </div>
 
+              <div
+                className="brand-new"
+                onClick={() => {
+                  stopCamera();
+                  resetSession();
+                  setIsSessionActive(false);
+                  navigate("/");
+                }}
+              >
+                <div className="brand-icon-box">
+                  <Activity size={22} />
+                </div>
+                <span className="brand-text">
+                  rehabilitation<span className="text-brand-primary">.ai</span>
+                </span>
+              </div>
+            </div>
 
-        </div>
-      </header>
+            <div className="header-controls">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setIsHistoryOpen(true)}
+                  className="flex items-center gap-2 px-6 py-3 bg-white border border-black/[0.05] text-gray-600 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-gray-50 transition-all cursor-pointer"
+                >
+                  <History size={16} />
+                  History
+                </button>
+
+                {isSessionActive ? (
+                  <button
+                    onClick={() => {
+                      finishSession();
+                      setIsSessionActive(false);
+                    }}
+                    className="finish-btn"
+                  >
+                    Finish Session
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsQuickStartOpen(true)}
+                    className="px-6 py-3 bg-brand-primary text-white rounded-xl text-[11px] font-black uppercase tracking-widest shadow-lg shadow-brand-primary/20 hover:scale-105 transition-all active:scale-95 cursor-pointer"
+                  >
+                    Start Session
+                  </button>
+                )}
+              </div>
+            </div>
+          </header>
 
 
       <div className="flex flex-col gap-6 w-full">
