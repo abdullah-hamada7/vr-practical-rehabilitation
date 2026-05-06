@@ -1,4 +1,9 @@
 export const ROM_CONFIG = {
+  squats:     { primaryKey: 'knee',  label: 'Knee Flexion',       targetAngle: 100, startAngle: 165, normalRange: '≤ 100°' },
+  heelSlides: { primaryKey: 'knee',  label: 'Knee Flexion',       targetAngle: 90,  startAngle: 165, normalRange: '≤ 90°'  },
+  bicepCurls: { primaryKey: 'elbow', label: 'Elbow Flexion',      targetAngle: 40,  startAngle: 165, normalRange: '≤ 40°'  },
+  lunges:     { primaryKey: 'knee',  label: 'Knee Flexion',       targetAngle: 90,  startAngle: 165, normalRange: '≤ 90°'  },
+  anklePump:  { primaryKey: 'ankle', label: 'Ankle Dorsiflexion', targetAngle: 130, startAngle: 165, normalRange: '≤ 130°' },
   squats:     { primaryKey: 'knee', label: 'Knee Flexion', targetAngle: 100, startAngle: 165, normalRange: '≤ 100°' },
   heelSlides: { primaryKey: 'knee', label: 'Knee Flexion', targetAngle: 90,  startAngle: 165, normalRange: '≤ 90°'  },
   bicepCurls: { primaryKey: 'elbow', label: 'Elbow Flexion', targetAngle: 40, startAngle: 165, normalRange: '≤ 40°' },
@@ -10,6 +15,8 @@ export const ROM_CONFIG = {
   birdDog:    { primaryKey: 'hip_extension', label: 'Hip Extension', targetAngle: 25, startAngle: 90, normalRange: '≥155° extension', requiredView: 'side' },
   pendulum:   { primaryKey: 'shoulder_swing', label: 'Shoulder Pendulum ROM', targetAngle: 55, startAngle: 90, normalRange: '≤55°', requiredView: 'side' },
   bridge:     { primaryKey: 'hip_bridge', label: 'Hip Extension Bridge', targetAngle: 20, startAngle: 85, normalRange: '≥160° extension', requiredView: 'side' },
+  quadSets:          { primaryKey: 'knee', label: 'Knee Extension',    targetAngle: 172, startAngle: 155, normalRange: '≥ 170°'  },
+  straightLegRaise:  { primaryKey: 'hip',  label: 'Hip Flexion (SLR)', targetAngle: 135, startAngle: 175, normalRange: '≤ 135°'  },
 };
 
 const DIAGNOSES = {
@@ -37,7 +44,13 @@ const DIAGNOSES = {
     { minScore: 40, status: 'moderate', label: 'Moderate Restriction',   advice: 'Reduce step length. Focus on controlled descent. Check hip extension ROM on the lunge side.' },
     { minScore: 0,  status: 'severe',   label: 'Severe Restriction',     advice: 'Do not advance depth. Revert to stationary exercises and review with therapist.' },
   ],
-  clamshell: [
+  anklePump: [
+    { minScore: 88, status: 'optimal',  label: 'Full ROM',              advice: 'Full ankle dorsiflexion achieved. Good circulatory and mobility response. Progress to standing calf raises when appropriate.' },
+    { minScore: 65, status: 'mild',     label: 'Mild Restriction',       advice: 'Slight dorsiflexion limitation — common post-surgically or with prolonged immobilisation. Continue gentle pumping and add towel stretching at end range.' },
+    { minScore: 40, status: 'moderate', label: 'Moderate Restriction',   advice: 'Moderate restriction. Assess for oedema, posterior capsule tightness, or Achilles involvement. Consider manual mobilisation before exercises.' },
+    { minScore: 0,  status: 'severe',   label: 'Severe Restriction',     advice: 'Severely limited dorsiflexion. May indicate significant swelling, joint stiffness, or surgical complication. Suspend and arrange immediate therapist review.' },
+  ],
+    clamshell: [
     { minScore: 88, status: 'optimal',  label: 'Full Hip Abduction',    advice: 'Excellent gluteus medius activation. Progress to resistance band.' },
     { minScore: 65, status: 'mild',     label: 'Partial Abduction',     advice: 'Moderate range. Focus on slow controlled opening phase.' },
     { minScore: 40, status: 'moderate', label: 'Limited Abduction',     advice: 'Restricted hip abduction. Assess TFL and hip capsule tightness.' },
@@ -78,6 +91,18 @@ const DIAGNOSES = {
     { minScore: 65, status: 'mild',     label: 'Adequate Extension',      advice: 'Good range. Focus on squeezing glutes at the top of the movement.' },
     { minScore: 40, status: 'moderate', label: 'Limited Extension',       advice: 'Limited hip extension. Assess hip flexor tightness.' },
     { minScore: 0,  status: 'severe',   label: 'Minimal Extension',       advice: 'Significantly limited. Manual therapy and passive stretching recommended.' },
+  ],
+  quadSets: [
+    { minScore: 88, status: 'optimal',  label: 'Full Extension',         advice: 'Full quadriceps activation achieved. Excellent isometric control. Progress to short arc quads and straight leg raises when appropriate.' },
+    { minScore: 65, status: 'mild',     label: 'Mild Inhibition',        advice: 'Slight extension deficit — common early post-op due to pain or effusion. Ensure thigh presses firmly. Add ice before session to reduce swelling.' },
+    { minScore: 40, status: 'moderate', label: 'Moderate Inhibition',    advice: 'Moderate quad inhibition. May indicate significant pain, effusion, or neural inhibition. Consider NMES support and review with therapist before progressing.' },
+    { minScore: 0,  status: 'severe',   label: 'Severe Inhibition',      advice: 'Marked quadriceps weakness or inhibition. Do not advance exercise. Arrange therapist assessment — possible haemarthrosis or nerve involvement.' },
+  ],
+  straightLegRaise: [
+    { minScore: 88, status: 'optimal',  label: 'Full ROM',               advice: 'Excellent SLR height achieved (≥ 45°). Good hip flexor strength and quad control. Progress to resisted SLR with ankle weight when appropriate.' },
+    { minScore: 65, status: 'mild',     label: 'Mild Restriction',       advice: 'Lift height mildly limited — common in early post-op. Focus on maintaining a straight knee throughout. Continue gentle SLR and add hip flexor activation exercises.' },
+    { minScore: 40, status: 'moderate', label: 'Moderate Restriction',   advice: 'Moderate SLR deficit. May indicate quad lag, hip flexor weakness, or pain inhibition. Check for extensor lag before progressing. Document and review if no improvement within one week.' },
+    { minScore: 0,  status: 'severe',   label: 'Severe Restriction',     advice: 'Severely limited SLR. Possible significant extensor lag, nerve involvement, or post-surgical complication. Do not advance — arrange immediate therapist review.' },
   ],
 };
 
