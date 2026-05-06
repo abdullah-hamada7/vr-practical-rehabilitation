@@ -57,10 +57,10 @@ export default function TherapistReport({ data, onClose }) {
                   <span className="metric-label">Avg. ROM Score</span>
                   <span className="metric-value">{data.romScore}%</span>
                 </div>
-                <div className="metric-card">
+                {/* <div className="metric-card">
                   <span className="metric-label">Stability Score</span>
                   <span className="metric-value">{data.latestStability ? Math.round(data.latestStability) : 'N/A'}%</span>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
