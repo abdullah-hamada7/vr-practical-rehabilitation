@@ -73,6 +73,33 @@ const exerciseConfig = {
       'Arch your spine down and lift your head (Camel)',
       'Move slowly through the full range of motion'
     ]
+  },
+  birdDog: {
+    videoId: '',
+    tips: [
+      'Start on hands and knees with a flat back',
+      'Extend opposite arm and leg simultaneously',
+      'Hold the position for at least 2 seconds',
+      'Keep both shoulders level — do not rotate your trunk'
+    ]
+  },
+  pendulum: {
+    videoId: '',
+    tips: [
+      'Lean forward at the hip and let your arm hang freely',
+      'Swing your arm forward and backward like a pendulum',
+      'Keep your elbow straight — do not actively curl',
+      'Relax your shoulder and let gravity do the work'
+    ]
+  },
+  bridge: {
+    videoId: '',
+    tips: [
+      'Lie on your back with knees bent and feet flat',
+      'Press your feet into the floor and lift your hips',
+      'Squeeze your glutes at the top of the movement',
+      'Keep your knees aligned over your ankles throughout'
+    ]
   }
 };
 

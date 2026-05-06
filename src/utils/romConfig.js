@@ -7,6 +7,9 @@ export const ROM_CONFIG = {
   deadBug:    { primaryKey: 'lumbar_stability', label: 'Lumbar Stability', targetAngle: 30, startAngle: 90, normalRange: '≥ 150° extension', requiredView: 'side' },
   singleLegStand: { primaryKey: 'hip_flexion', label: 'Hip Flexion Hold', targetAngle: 135, startAngle: 175, normalRange: '≤ 135°', requiredView: 'front' },
   catCamel:   { primaryKey: 'spine', label: 'Spinal Flexion', targetAngle: 155, startAngle: 165, normalRange: '≤ 155°', requiredView: 'side' },
+  birdDog:    { primaryKey: 'hip_extension', label: 'Hip Extension', targetAngle: 25, startAngle: 90, normalRange: '≥155° extension', requiredView: 'side' },
+  pendulum:   { primaryKey: 'shoulder_swing', label: 'Shoulder Pendulum ROM', targetAngle: 55, startAngle: 90, normalRange: '≤55°', requiredView: 'side' },
+  bridge:     { primaryKey: 'hip_bridge', label: 'Hip Extension Bridge', targetAngle: 20, startAngle: 85, normalRange: '≥160° extension', requiredView: 'side' },
 };
 
 const DIAGNOSES = {
@@ -57,6 +60,24 @@ const DIAGNOSES = {
     { minScore: 65, status: 'mild',     label: 'Adequate Range',        advice: 'Good range. Add thoracic extension mobilisation drills.' },
     { minScore: 40, status: 'moderate', label: 'Restricted Mobility',   advice: 'Restricted spinal motion. Soft tissue mobilisation recommended.' },
     { minScore: 0,  status: 'severe',   label: 'Severely Limited',      advice: 'Severely limited spinal mobility. Consult supervising therapist.' },
+  ],
+  birdDog: [
+    { minScore: 90, status: 'optimal',  label: 'Excellent Stability',     advice: 'Excellent lumbopelvic stability. Progress hold duration to 3 seconds.' },
+    { minScore: 70, status: 'mild',     label: 'Good Stability',          advice: 'Good control. Focus on extending hold time and breathing steadily.' },
+    { minScore: 50, status: 'moderate', label: 'Hip Drop Detected',       advice: 'Hip drop during hold. Strengthen gluteus medius before progressing.' },
+    { minScore: 0,  status: 'severe',   label: 'Significant Instability', advice: 'Significant instability. Regress to single-limb holds first.' },
+  ],
+  pendulum: [
+    { minScore: 88, status: 'optimal',  label: 'Full Pendulum ROM',       advice: 'Full pendulum range achieved. Progress to gentle active-assisted movement.' },
+    { minScore: 65, status: 'mild',     label: 'Adequate Range',          advice: 'Moderate range. Focus on relaxing the shoulder and increasing swing arc.' },
+    { minScore: 40, status: 'moderate', label: 'Restricted ROM',          advice: 'Limited swing arc. Ensure full relaxation of shoulder muscles.' },
+    { minScore: 0,  status: 'severe',   label: 'Minimal ROM',             advice: 'Severely restricted. Check patient position and consult therapist.' },
+  ],
+  bridge: [
+    { minScore: 88, status: 'optimal',  label: 'Full Hip Extension',      advice: 'Full bridge height achieved. Progress to single-leg bridge.' },
+    { minScore: 65, status: 'mild',     label: 'Adequate Extension',      advice: 'Good range. Focus on squeezing glutes at the top of the movement.' },
+    { minScore: 40, status: 'moderate', label: 'Limited Extension',       advice: 'Limited hip extension. Assess hip flexor tightness.' },
+    { minScore: 0,  status: 'severe',   label: 'Minimal Extension',       advice: 'Significantly limited. Manual therapy and passive stretching recommended.' },
   ],
 };
 
