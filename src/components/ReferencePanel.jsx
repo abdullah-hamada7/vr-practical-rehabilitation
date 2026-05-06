@@ -64,17 +64,6 @@ const exerciseConfig = {
       "Do not let your hips roll backward",
     ],
   },
-  deadBug: {
-    videoId: "4XLEnwUr1d8",
-    externalUrl:
-      "https://www.sports-injury-physio.com/search?q=Dead-Bug-Exercise",
-    tips: [
-      "Keep your lower back pressed firmly to the floor",
-      "Lower opposite arm and leg together slowly",
-      "Breathe out steadily during the lowering phase",
-      "Return to start position with control",
-    ],
-  },
   singleLegStand: {
     videoId: "7SF7AYh2_Yw",
     externalUrl:
@@ -94,17 +83,6 @@ const exerciseConfig = {
       "Round your spine up toward the ceiling (Cat)",
       "Arch your spine down and lift your head (Camel)",
       "Move slowly through the full range of motion",
-    ],
-  },
-  birdDog: {
-    videoId: "Yap7kqAFHYo",
-    externalUrl:
-      "https://www.sports-injury-physio.com/search?q=Bird-Dog-Exercise",
-    tips: [
-      "Start on hands and knees with a flat back",
-      "Extend opposite arm and leg simultaneously",
-      "Hold the position for at least 2 seconds",
-      "Keep both shoulders level — do not rotate your trunk",
     ],
   },
   pendulum: {
